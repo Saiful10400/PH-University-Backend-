@@ -7,7 +7,7 @@ import FacultyZodValidation from "./academicFaculty.validation";
 const router=Express.Router()
 
 // 1. create one
-router.post("/create",zodValidation(FacultyZodValidation.createAcademicFacultyValidationZodSchema),academicFacultyController.createOne)
+router.post("/create",zodValidation(FacultyZodValidation.create),academicFacultyController.createOne)
 
 //2. get all
 router.get("/",academicFacultyController.getAll)
@@ -16,7 +16,7 @@ router.get("/",academicFacultyController.getAll)
 router.get("/:facultyId",academicFacultyController.getOne)
 
 // 4. updateOne
-router.patch("/:facultyId",zodValidation(FacultyZodValidation.updateAcademicFacultyValidationZodSchema),academicFacultyController.updateOne)
+router.patch("/:facultyId",zodValidation(FacultyZodValidation.update),academicFacultyController.updateOne)
 
 
 const facultyRouter=router

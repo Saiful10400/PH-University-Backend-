@@ -1,12 +1,12 @@
 import { Request,Response } from "express";
 import catchAsync from "../../utils/catchAsync";
-import academicFacultyService from "./academicFaculty.service";
 import sendRes from "../../utils/sendRes";
 import httpStatus from "http-status";
+import academicDepartmentService from "./academicDepartment.service";
 
 // create one
 const createOne=catchAsync(async(req:Request,res:Response)=>{
-    const result=await academicFacultyService.createOne(req.body) 
+    const result=await academicDepartmentService.createOne(req.body) 
     
     sendRes(res, {
         data: result,
@@ -19,7 +19,7 @@ const createOne=catchAsync(async(req:Request,res:Response)=>{
 
 // get all.
 const getAll=catchAsync(async(req:Request,res:Response)=>{
-    const result=await academicFacultyService.getAll()
+    const result=await academicDepartmentService.getAll()
     
     sendRes(res, {
         data: result,
@@ -33,7 +33,7 @@ const getAll=catchAsync(async(req:Request,res:Response)=>{
 // get one.
 const getOne=catchAsync(async(req:Request,res:Response)=>{
     const {facultyId}=req.params
-    const result=await academicFacultyService.getOne(facultyId)
+    const result=await academicDepartmentService.getOne(facultyId)
     
     sendRes(res, {
         data: result,
@@ -47,7 +47,7 @@ const getOne=catchAsync(async(req:Request,res:Response)=>{
 // update one
 const updateOne=catchAsync(async(req:Request,res:Response)=>{
     const{facultyId}=req.params
-    const result=await academicFacultyService.updateOne(facultyId,req.body) 
+    const result=await academicDepartmentService.updateOne(facultyId,req.body) 
     
     sendRes(res, {
         data: result,
@@ -59,10 +59,10 @@ const updateOne=catchAsync(async(req:Request,res:Response)=>{
 })
 
 
-const academicFacultyController={
+const academicDepartmentController={
     createOne,
     getAll,
     updateOne,
     getOne
 }
-export default academicFacultyController
+export default academicDepartmentController

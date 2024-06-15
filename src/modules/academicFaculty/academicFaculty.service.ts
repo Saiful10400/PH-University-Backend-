@@ -22,7 +22,7 @@ const getOne=async(id:string)=>{
 
 //4. update one academic faculty
 const updateOne=async(id:string,payload:Partial<TAcademicFaculty>)=>{
-    const result=await academicFacultyModel.findByIdAndUpdate(id,payload)
+    const result=await academicFacultyModel.findByIdAndUpdate(id,payload,{new:true})
     return result
 }
 
