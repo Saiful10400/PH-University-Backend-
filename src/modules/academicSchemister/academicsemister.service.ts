@@ -1,3 +1,5 @@
+import httpStatus from "http-status";
+import appError from "../../handleError/appErrorHandler";
 import { schemisterCodeobj } from "./academicsemister.constant";
 import { TAcademicSemester } from "./academicsemister.interface";
 import { academicSemesterModel } from "./accademicsemister.model";
@@ -7,7 +9,7 @@ const createSchemister=async(payload:TAcademicSemester)=>{
     // validating is the payload comming with propper schemister code.
    
     if(schemisterCodeobj[payload.name]!==payload.code){
-        throw new Error("Schemister code is wrong!")
+        throw new appError(httpStatus.UNAUTHORIZED,"Schemister code is wrong!")
     }
     const result=await academicSemesterModel.create(payload)
     return result
@@ -28,9 +30,9 @@ const getOneSchemister=async (id:string)=>{
 // update a schemister.
 const updateOneSchemister=async(id:string,payload:TAcademicSemester)=>{
     if(payload.name&&payload.code&&schemisterCodeobj[payload.name]!==payload.code){
-        throw new Error("invalid schemister id")
+        throw new appError(httpStatus.BAD_REQUEST,"invalid schemister id")
     }
-    const result=await academicSemesterModel.findByIdAndUpdate(id,payload,{new:true})
+    const result=await academicSemesterModel.findOneAndUpdate({_id:id},payload,{new:true})
     return result
 }
 

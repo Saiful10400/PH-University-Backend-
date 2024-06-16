@@ -1,9 +1,11 @@
 
+import httpStatus from "http-status"
 import { productModel } from "../product/product.model"
 import { orderModel } from "./order.model"
 import { orderZodEmailSchema } from "./order.zod.schema"
 import { orderType } from "./type.order"
 import { Request } from "express"
+import appError from "../../handleError/appErrorHandler"
 
 // # Inventory status checking and updating functions.
 
@@ -65,7 +67,7 @@ const serviceGetAllOrders=async (requst:Request)=>{
           }
   
       } else{
-        throw new Error("Incorrect query parameter.")
+        throw new appError(httpStatus.BAD_REQUEST,"Incorrect query parameter.")
       }
   
 

@@ -12,10 +12,10 @@ router.post("/create",zodValidation(DepartmentZodValidation.create),academicDepa
 router.get("/",academicDepartmentController.getAll)
 
 //3. get one by id.
-router.get("/:facultyId",academicDepartmentController.getOne)
+router.get("/:departmentId",academicDepartmentController.getOne)
 
 // 4. updateOne
-router.patch("/:facultyId",zodValidation(DepartmentZodValidation.update),academicDepartmentController.updateOne)
+router.patch("/:departmentId",zodValidation(DepartmentZodValidation.update),academicDepartmentController.updateOne)
 
 
 const departmentRoute=router

@@ -6,7 +6,8 @@ import httpStatus from "http-status"
 
 const globalErrHandler=(err:any,req:Request,res:Response,next:NextFunction)=>{
 const message=err.message||"Something went wrong!"
-return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
+const statusCode=err.statusCode|| httpStatus.INTERNAL_SERVER_ERROR
+return res.status(statusCode).json({
     success:false,
     message,
     error:err

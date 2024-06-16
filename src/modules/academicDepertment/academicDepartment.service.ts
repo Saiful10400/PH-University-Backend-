@@ -11,13 +11,13 @@ const createOne=async(payload:TAcademicDepartment)=>{
 
 //2.get all academic facults form db.
 const getAll=async()=>{
-    const result=await academicDepartmentModel.find()
+    const result=await academicDepartmentModel.find().populate("academicFaculty")
     return result
 }
 
 //3.get single academic faculty form db.
 const getOne=async(id:string)=>{
-    const result=await academicDepartmentModel.findById(id)
+    const result=await academicDepartmentModel.findById(id).populate("academicFaculty")
     return result
 }
 

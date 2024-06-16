@@ -1,5 +1,7 @@
 import { Schema, model } from 'mongoose';
 import { TGuardian, TLocalGuardian, TStudent, TUserName } from './student.interface';
+import appError from '../../handleError/appErrorHandler';
+import httpStatus from 'http-status';
 
 
 const userNameSchema = new Schema<TUserName>({
@@ -71,14 +73,26 @@ const studentSchema = new Schema<TStudent>({
   email: { type: String, required: true },
   contactNo: { type: String, required: true },
   emergencyContactNo: { type: String, required: true },
-  bloogGroup: {type:String,enum:['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-']},
+  bloodGroup: {type:String,enum:['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-']},
   presentAddress: { type: String, required: true },
-  permanentAddres: { type: String, required: true },
+  permanentAddress: { type: String, required: true },
   guardian: guardianSchema,
   localGuardian: localGuradianSchema,
+  academicDepartment:{type:Schema.Types.ObjectId,ref:"academicDepartment"},
+  admissionSemester:{type:Schema.Types.ObjectId,ref:"AcademicSemester"},
   profileImg: { type: String },
   
 });
+
+studentSchema.pre("save",async function(next){
+  console.log("prehock midware.")
+  const isStudentExist:any=await StudentModel.findOne({email:this.email})
+  if(isStudentExist){
+    throw new appError(httpStatus.BAD_GATEWAY,"This student data is existing.")
+    
+  } 
+  next()
+})
 
 export const StudentModel = model<TStudent>('Student', studentSchema);
  

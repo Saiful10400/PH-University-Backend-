@@ -10,7 +10,7 @@ import catchAsync from "../../utils/catchAsync"
 const createAStudent=catchAsync(async(req:Request,res:Response,next:NextFunction)=>{
    
      const{password,student}=req.body
-    
+
      const result=await userService.CreateAStudent(password,student)
     return sendRes(res,{
          data:result,

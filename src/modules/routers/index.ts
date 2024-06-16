@@ -3,6 +3,7 @@ import userRoute from "../user/user.router";
 import schemisterRoute from "../academicSchemister/academicsemister.router";
 import facultyRouter from "../academicFaculty/academicFaculty.router";
 import departmentRoute from "../academicDepertment/academicDepartment.router";
+import { StudentRoutes } from "../student/student.router";
 
 const router = Router();
 
@@ -12,6 +13,10 @@ const routes: Trouter = [
   {
     path: "/user",
     func: userRoute,
+  },
+  {
+    path: "/student",
+    func: StudentRoutes
   },
   {
     path: "/schemister",

@@ -1,8 +1,8 @@
 import express from "express";
 import userController from "./user.controller";
 import { AnyZodObject } from "zod";
-import stdZodValSchema from "../student/student.validation";
 import zodValidation from "../../middleware/zodvalidation";
+import { stdZodValidation } from "../student/student.validation";
 
 const userRoute = express.Router();
 
@@ -13,7 +13,7 @@ const userRoute = express.Router();
 
 userRoute.post(
   "/student",
-  zodValidation(stdZodValSchema.stdMiddlewareVal),
+  zodValidation(stdZodValidation.create),
   userController.createAStudent
 );
 

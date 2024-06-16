@@ -1,20 +1,60 @@
-import { Request,Response } from "express";
-// get a studetn with :id.
+import { RequestHandler } from 'express';
+import httpStatus from 'http-status';
+import catchAsync from '../../utils/catchAsync';
+import { StudentServices } from './student.service';
+import sendRes from '../../utils/sendRes';
 
-import catchAsync from "../../utils/catchAsync";
-import stdService from "./student.service";
-import sendRes from "../../utils/sendRes";
-import httpStatus from "http-status";
+const getOne = catchAsync(async (req, res) => {
+  const { id } = req.params;
+  const result = await StudentServices.getOne(id);
 
-const getAStudent=catchAsync(async(req:Request,res:Response)=>{
-    const {id}=req.params
-    const result=await stdService.GetAStudent(id)
-    sendRes(res,{data:result,status:httpStatus.OK,message:"successfully fetched std data",success:true})
-})
+  sendRes(res, {
+    status: httpStatus.OK,
+    success: true,
+    message: 'Student is retrieved successfully',
+    data: result,
+  });
+});
 
+const getAll: RequestHandler = catchAsync(async (req, res) => {
+  const result = await StudentServices.getAll(req.query);
 
-const stdController={
-    getAStudent
-}
+  sendRes(res, {
+    status: httpStatus.OK,
+    success: true,
+    message: 'Student are retrieved successfully',
+    data:result
+  });
+});
 
-export default stdController
+const updateOne = catchAsync(async (req, res) => {
+  const { id } = req.params;
+  const { student } = req.body;
+  const result = await StudentServices.updateOne(id, student);
+  console.log(result)
+  sendRes(res, {
+    status: httpStatus.OK,
+    success: true,
+    message: 'Student is updated successfully',
+    data: result,
+  });
+});
+
+const deleteOne = catchAsync(async (req, res) => {
+  const { id } = req.params;
+  const result = await StudentServices.deleteOne(id);
+
+  sendRes(res, {
+    status: httpStatus.OK,
+    success: true,
+    message: 'Student is deleted successfully',
+    data: result,
+  });
+});
+
+export const StudentControllers = {
+  getAll,
+  getOne,
+  deleteOne,
+  updateOne,
+};

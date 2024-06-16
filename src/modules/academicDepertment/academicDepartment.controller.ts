@@ -10,7 +10,7 @@ const createOne=catchAsync(async(req:Request,res:Response)=>{
     
     sendRes(res, {
         data: result,
-        message: "academis faculty is created successfully",
+        message: "academis department is created successfully",
         status: httpStatus.OK,
         success: true,
       });
@@ -23,7 +23,7 @@ const getAll=catchAsync(async(req:Request,res:Response)=>{
     
     sendRes(res, {
         data: result,
-        message: "academis facultys fetched successfully",
+        message: "academis departments fetched successfully",
         status: httpStatus.OK,
         success: true,
       });
@@ -32,12 +32,12 @@ const getAll=catchAsync(async(req:Request,res:Response)=>{
 
 // get one.
 const getOne=catchAsync(async(req:Request,res:Response)=>{
-    const {facultyId}=req.params
-    const result=await academicDepartmentService.getOne(facultyId)
+    const {departmentId}=req.params
+    const result=await academicDepartmentService.getOne(departmentId)
     
     sendRes(res, {
         data: result,
-        message: "academis faculty fetched successfully",
+        message: "academis department fetched successfully",
         status: httpStatus.OK,
         success: true,
       });
@@ -46,12 +46,12 @@ const getOne=catchAsync(async(req:Request,res:Response)=>{
 
 // update one
 const updateOne=catchAsync(async(req:Request,res:Response)=>{
-    const{facultyId}=req.params
-    const result=await academicDepartmentService.updateOne(facultyId,req.body) 
+    const{departmentId}=req.params
+    const result=await academicDepartmentService.updateOne(departmentId,req.body) 
     
     sendRes(res, {
         data: result,
-        message: "academis faculty updated successfully",
+        message: "academis department updated successfully",
         status: httpStatus.OK,
         success: true,
       });

@@ -43,8 +43,8 @@ const getOneSchemister=catchAsync(async (req: Request, res: Response)=>{
 const updateOneSchemister=catchAsync(async (req: Request, res: Response)=>{
   const data=req.body
   const {id}=req.params
+  
   const result=await academicSemisterService.updateOneSchemister(id as string,data)
-  console.log(result)
   sendRes(res, {
     data: result,
     message: "academis schemister is updated successfully",

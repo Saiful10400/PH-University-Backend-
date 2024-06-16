@@ -1,7 +1,6 @@
 import Express  from "express";
 import academicFacultyController from "./academicFaculty.controller";
 import zodValidation from "../../middleware/zodvalidation";
-import academicFacultyValidationZodSchema from "./academicFaculty.validation";
 import FacultyZodValidation from "./academicFaculty.validation";
 
 const router=Express.Router()

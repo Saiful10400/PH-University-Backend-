@@ -1,6 +1,8 @@
+import httpStatus from "http-status"
 import { productModel } from "./product.model"
 import { productType } from "./type.product"
 import { Request } from "express"
+import appError from "../../handleError/appErrorHandler"
 
 // 1.create a product.
 const serviceCreateProduct=async(data:productType)=>{
@@ -37,7 +39,7 @@ const serviceGetAllProducts=async(request:Request)=>{
         ,data:result}
     } 
     else{
-        throw new Error("Incorrect query parameter.")
+        throw new appError(httpStatus.BAD_REQUEST,"Incorrect query parameter.")
       }
     
 }
